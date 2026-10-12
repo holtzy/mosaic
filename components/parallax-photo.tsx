@@ -3,6 +3,7 @@
 import * as React from "react"
 import Image from "next/image"
 
+import { withBasePath } from "@/lib/base-path"
 import { cn } from "@/lib/utils"
 
 type ParallaxPhotoProps = {
@@ -91,7 +92,7 @@ function ParallaxPhoto({
         }}
       >
         <Image
-          src={src}
+          src={withBasePath(src)}
           alt={alt}
           fill
           sizes={sizes}

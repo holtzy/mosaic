@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { MountainIcon } from "lucide-react"
 
+import { withBasePath } from "@/lib/base-path"
 import { cn } from "@/lib/utils"
 
 type PhotoProps = {
@@ -32,7 +33,7 @@ function Photo({
     >
       {src ? (
         <Image
-          src={src}
+          src={withBasePath(src)}
           alt={alt}
           fill
           sizes={sizes}

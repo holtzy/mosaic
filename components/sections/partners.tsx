@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/tooltip"
 import { site } from "@/content/site"
 import { ui } from "@/content/ui"
+import { withBasePath } from "@/lib/base-path"
 
 /** Quiet row of institution logos, greyed out until hovered. */
 function Partners() {
@@ -35,7 +36,7 @@ function Partners() {
                   className="block opacity-50 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0 focus-visible:opacity-100 focus-visible:grayscale-0 dark:rounded-sm dark:bg-white dark:p-1.5"
                 >
                   <Image
-                    src={partner.logo.src}
+                    src={withBasePath(partner.logo.src)}
                     alt=""
                     width={partner.logo.width}
                     height={partner.logo.height}
