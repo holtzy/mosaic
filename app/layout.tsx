@@ -1,17 +1,24 @@
-import { Geist, Geist_Mono, Roboto } from "next/font/google"
+import type { Metadata } from "next"
+import { Geist, Geist_Mono } from "next/font/google"
 
 import "./globals.css"
+import { LocaleProvider } from "@/components/locale-provider"
 import { ThemeProvider } from "@/components/theme-provider"
-import { cn } from "@/lib/utils";
+import { site } from "@/content/site"
+import { defaultLocale } from "@/lib/i18n"
+import { cn } from "@/lib/utils"
 
-const robotoHeading = Roboto({subsets:['latin'],variable:'--font-heading'});
-
-const geist = Geist({subsets:['latin'],variable:'--font-sans'})
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" })
 
 const fontMono = Geist_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
 })
+
+export const metadata: Metadata = {
+  title: `${site.name} · ${site.expansion}`,
+  description: site.description[defaultLocale],
+}
 
 export default function RootLayout({
   children,
@@ -20,12 +27,19 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang={defaultLocale}
       suppressHydrationWarning
-      className={cn("antialiased", fontMono.variable, "font-sans", geist.variable, robotoHeading.variable)}
+      className={cn(
+        "scroll-smooth antialiased",
+        fontMono.variable,
+        geist.variable,
+        "font-sans"
+      )}
     >
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <LocaleProvider>{children}</LocaleProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
